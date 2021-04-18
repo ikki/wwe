@@ -1,47 +1,68 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
+$slider-name: typing-slider;
+$slides: 3;
+$typing-duration: 5s;
+$tab-letters: 16 23 12; //number of characters in each paragraph
+$slider-font-size: 3rem;
+$background: #FFCC00;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #000;
-  color: #eee;
-}
-.container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-color: $background;
 }
-.container p {
-  font-size: 3rem;
-  padding: 0.5rem;
+
+@keyframes cursor {
+  from, to { border-color: transparent; }
+  50% { border-color: black; }
+}
+
+@keyframes typing {
+  from { width: 100%; }
+  90%, to { width: 0; }
+}
+
+@keyframes slide {
+  #{100% / $slides} { font-size: $slider-font-size; letter-spacing: 3px; }
+  to { font-size: 0; letter-spacing: 0; }
+}
+
+.#{$slider-name} {
+  font-family: Consolas, monospace;
   font-weight: bold;
-  letter-spacing: 0.1rem;
   text-align: center;
-  overflow: hidden;
+  white-space: nowrap;
 }
-.container p span.typed-text {
-  font-weight: normal;
-  color: #dd7732;
+
+.#{$slider-name} p {
+  position: relative;
+  display: inline;
+  font-size: 0;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  animation: slide $typing-duration * $slides step-start infinite;
 }
-.container p span.cursor {
-  display: inline-block;
-  background-color: #ccc;
-  margin-left: 0.1rem;
-  width: 3px;
-  animation: blink 1s infinite;
+
+.#{$slider-name} p::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-left: 3px solid black;
+  background-color: $background;
+  animation: typing $typing-duration infinite,
+             cursor 1s infinite;
 }
-.container p span.cursor.typing {
-  animation: none;
-}
-@keyframes blink {
-  0%  { background-color: #ccc; }
-  49% { background-color: #ccc; }
-  50% { background-color: transparent; }
-  99% { background-color: transparent; }
-  100%  { background-color: #ccc; }
+
+@each $letters in $tab-letters {
+  $i: index($tab-letters, $letters);
+  .#{$slider-name} p:nth-child(#{$i}) {
+    animation-delay:  $typing-duration * ($i - 1);
+    &::after {
+      animation-delay: $typing-duration * ($i - 1);
+      animation-timing-function: steps(#{$letters}), step-end;
+    }
+  }
 }
