@@ -1,97 +1,47 @@
-$black: #000;
-$blue: #00ebd4;
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-@import url(https://fonts.googleapis.com/css?family=Share+Tech);
-$shareTech: "Share Tech";
-
-body{
-   background-color: $black;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-h1{
-   font-family: $shareTech;
-   animation: pulse .9s infinite;
-   color: $blue;
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #000;
+  color: #eee;
 }
-
-#identity-results, #resume, #loading-alpha-div, #loadingH1, #loadingMessage2, #message{
-   margin-top: 20px;
-   font-family: $shareTech;
-   font-weight: 900;
-   font-size: 24px;
-   color: $blue;
-   animation: pulse .9s infinite;
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-i{
-   font-size: 24px;
-   color: $blue;
-   animation: pulse .9s infinite;  
+.container p {
+  font-size: 3rem;
+  padding: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  text-align: center;
+  overflow: hidden;
 }
-
-.block{
-   width: 50px;
-   height: 50px;
-   background-color: $black;
+.container p span.typed-text {
+  font-weight: normal;
+  color: #dd7732;
 }
-
-@keyframes pulse {
-   0% {
-    opacity: 1;
-  }
-   50% {
-    opacity: 0.8;
-  }
-  100% {
-    opacity: 1;
-  }
+.container p span.cursor {
+  display: inline-block;
+  background-color: #ccc;
+  margin-left: 0.1rem;
+  width: 3px;
+  animation: blink 1s infinite;
 }
-
-.cursor:after {
-	content:"_";
-	opacity: 0;
-	animation: cursor 1s infinite;
+.container p span.cursor.typing {
+  animation: none;
 }
-.sign:before{
-   content: "> ";
-}
-@keyframes cursor {
-	0% {
-		opacity: 0;
-	}
-	40% {
-		opacity: 0;
-	}
-	50% {
-		opacity: 1;
-	}
-	90% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
-}
-
-#loading-alpha-div, .img-div{
-   display: none;
-}
-
-img{
-   margin: 50px 0;
-   animation: pulse .9s infinite;
-}
-
-#loadingMessage2{
-   display: none;
-}
-
-.sub-item{
-   margin-top: 20px;
-   margin-left: 40px;
-}
-
-.inline{
-   display: inline;
-   margin-left: 10px;
+@keyframes blink {
+  0%  { background-color: #ccc; }
+  49% { background-color: #ccc; }
+  50% { background-color: transparent; }
+  99% { background-color: transparent; }
+  100%  { background-color: #ccc; }
 }
